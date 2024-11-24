@@ -60,5 +60,10 @@ if [ -n "${INPUT_ENV_FILE}" ];then
     # export ENV_FILE="${INPUT_ENV_FILE}"
 fi
 
-echo -e "\u001b[36mDeploying Stack: \u001b[37;1m${INPUT_NAME}"
-docker stack deploy -c "${INPUT_FILE}" "${INPUT_NAME}"
+if [ "${INPUT_WITH_REGISTRY_AUTH}" = "true" ]; then
+    echo -e "\u001b[36mDeploying Stack: \u001b[37;1m${INPUT_NAME} \u001b[36mwith Registry Auth."
+    docker stack deploy -c "${INPUT_FILE}" "${INPUT_NAME}" --with-registry-auth
+else
+    echo -e "\u001b[36mDeploying Stack: \u001b[37;1m${INPUT_NAME}"
+    docker stack deploy -c "${INPUT_FILE}" "${INPUT_NAME}"
+fi
