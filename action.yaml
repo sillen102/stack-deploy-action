@@ -32,9 +32,8 @@ inputs:
   env_file:
     description: "Environment File"
     required: false
-  with_registry_auth:
-    description: "Registry Auth Flag"
-    default: "false"
+  private_image:
+    description: "Private Image Tag"
     required: false
 
 runs:
