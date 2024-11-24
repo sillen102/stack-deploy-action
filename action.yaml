@@ -32,11 +32,14 @@ inputs:
   env_file:
     description: "Environment File"
     required: false
-  private_repository_user:
-    description: "Private Container Repository Owner"
+  private_registry:
+    description: "Private Container Registry"
     required: false
-  private_repository_token_file:
-    description: "Private Container Repository Token File"
+  private_registry_user:
+    description: "Private Container Registry Owner"
+    required: false
+  private_registry_token_file:
+    description: "Private Container Registry Token File"
     required: false
 
 runs:
