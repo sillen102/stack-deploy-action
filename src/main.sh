@@ -56,15 +56,11 @@ if [ -n "${INPUT_ENV_FILE}" ];then
     set -a
     # shellcheck disable=SC1090
     source "${INPUT_ENV_FILE}"
-    # echo TRAEFIK_HOST: "${TRAEFIK_HOST}"
-    # export ENV_FILE="${INPUT_ENV_FILE}"
 fi
 
 if [ -n "${INPUT_PRIVATE_REGISTRY}" ] && [ -n "${INPUT_PRIVATE_REGISTRY_USER}" ] && [ -n "${INPUT_PRIVATE_REGISTRY_TOKEN_FILE}" ]; then
     echo -e "\u001b[36mLogging in to private registry"
     cat "${INPUT_PRIVATE_REGISTRY_TOKEN_FILE}" | docker login --username "${INPUT_PRIVATE_REGISTRY_USER}" "${INPUT_PRIVATE_REGISTRY}" --password-stdin
-    # echo -e "\u001b[36mPulling private image before deploying stack: ${INPUT_PRIVATE_IMAGE}"
-    # docker pull "${INPUT_PRIVATE_IMAGE}"
     echo -e "\u001b[36mDeploying Stack: \u001b[37;1m${INPUT_NAME} \u001b[36mwith Registry Auth."
     docker stack deploy -c "${INPUT_FILE}" "${INPUT_NAME}" --with-registry-auth
 else
