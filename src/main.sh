@@ -60,9 +60,11 @@ if [ -n "${INPUT_ENV_FILE}" ];then
     # export ENV_FILE="${INPUT_ENV_FILE}"
 fi
 
-if [ -n "${INPUT_PRIVATE_IMAGE}" ]; then
-    echo -e "\u001b[36mPulling private image before deploying stack: ${INPUT_PRIVATE_IMAGE}"
-    docker pull "${INPUT_PRIVATE_IMAGE}"
+if [ -n "${PRIVATE_REGISTRY}" ] && [ -n "${PRIVATE_REGISTRY_USER}" ] && [ -n "${PRIVATE_REGISTRY_TOKEN_FILE}" ]; then
+    echo -e "\u001b[36mLogging in to private registry"
+    cat "${PRIVATE_REGISTRY_TOKEN_FILE}" | docker login --username "${PRIVATE_REGISTRY_USER}" "${PRIVATE_REGISTRY}" --password-stdin
+    # echo -e "\u001b[36mPulling private image before deploying stack: ${INPUT_PRIVATE_IMAGE}"
+    # docker pull "${INPUT_PRIVATE_IMAGE}"
     echo -e "\u001b[36mDeploying Stack: \u001b[37;1m${INPUT_NAME} \u001b[36mwith Registry Auth."
     docker stack deploy -c "${INPUT_FILE}" "${INPUT_NAME}" --with-registry-auth
 else

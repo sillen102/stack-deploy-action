@@ -32,8 +32,11 @@ inputs:
   env_file:
     description: "Environment File"
     required: false
-  private_image:
-    description: "Private Image Tag"
+  private_repository_user:
+    description: "Private Container Repository Owner"
+    required: false
+  private_repository_token_file:
+    description: "Private Container Repository Token File"
     required: false
 
 runs:
