@@ -59,7 +59,7 @@ if [ -n "${INPUT_ENV_FILE}" ];then
 fi
 
 echo "Hello debug"
-echo $(ls -la)
+echo $(pwd)
 
 if [ -n "${INPUT_PRIVATE_REGISTRY}" ] && [ -n "${INPUT_PRIVATE_REGISTRY_USER}" ] && [ -n "${INPUT_PRIVATE_REGISTRY_TOKEN_FILE}" ]; then
     echo -e "\u001b[36mLogging in to private registry"
