@@ -58,15 +58,17 @@ if [ -n "${INPUT_ENV_FILE}" ];then
     source "${INPUT_ENV_FILE}"
 fi
 
-echo "Hello debug"
-echo $(pwd)
-
 if [ -n "${INPUT_PRIVATE_REGISTRY}" ] && [ -n "${INPUT_PRIVATE_REGISTRY_USER}" ] && [ -n "${INPUT_PRIVATE_REGISTRY_TOKEN_FILE}" ]; then
     echo -e "\u001b[36mLogging in to private registry"
     cat "${INPUT_PRIVATE_REGISTRY_TOKEN_FILE}" | docker login --username "${INPUT_PRIVATE_REGISTRY_USER}" "${INPUT_PRIVATE_REGISTRY}" --password-stdin
     echo -e "\u001b[36mDeploying Stack: \u001b[37;1m${INPUT_NAME} \u001b[36mwith Registry Auth."
     docker stack deploy -c "${INPUT_FILE}" "${INPUT_NAME}" --with-registry-auth
 else
+    echo "Hello debug"
+    echo $(pwd)
+    echo $(ls)
+    echo "Input file: ${INPUT_FILE}"
+
     echo -e "\u001b[36mDeploying Stack: \u001b[37;1m${INPUT_NAME}"
     docker stack deploy -c "${INPUT_FILE}" "${INPUT_NAME}"
 fi
