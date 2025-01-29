@@ -38,8 +38,8 @@ inputs:
   private_registry_user:
     description: "Private Container Registry Owner"
     required: false
-  private_registry_token_file:
-    description: "Private Container Registry Token File"
+  private_registry_token:
+    description: "Private Container Registry Token"
     required: false
 
 runs:
